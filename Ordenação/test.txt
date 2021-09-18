@@ -1,0 +1,40 @@
+#include "pch.h"
+
+#include "./ordenacao.h"
+
+#include <windows.h>
+
+TEST(TestCaseName, TestName) {
+
+    LARGE_INTEGER tempoInicial, tempoFinal, freq;
+    float tempoTotal;
+
+    struct array* v1;
+   // struct array* v2;
+
+    int tamanho = pow(10,5);
+
+    v1 = inicializar(tamanho);
+  // v2 = inicializar(tamanho);
+
+    inserirElemetoOrdenado(v1);
+
+    QueryPerformanceCounter(&tempoInicial);
+
+    quickSort(v1->elementos, 0, v1->tamanho - 1);
+   // quickSortPivoRandomizada(v2->elementos, 0,v2->tamanho);
+
+    QueryPerformanceCounter(&tempoFinal);
+    QueryPerformanceFrequency(&freq);
+    tempoTotal = (float)(tempoFinal.QuadPart - tempoInicial.QuadPart) / freq.QuadPart;
+
+    printf("tempo = %Lf \n", tempoTotal  * 1000 );
+
+
+    //quickSortPivoRandomizada(v2->elementos, 0, v2->tamanho);
+
+  EXPECT_EQ(1, 1);
+ // EXPECT_TRUE(true);
+// free(v2);
+     free(v1);
+}
